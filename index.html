@@ -4,6 +4,47 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nathalie Pulcini — Instagram Brand Report 2026</title>
+<script>
+(function() {
+  var correct = 'nathaliesploon2026';
+  var entered = sessionStorage.getItem('report_auth');
+  if (entered !== correct) {
+    document.addEventListener('DOMContentLoaded', function() {
+      document.body.style.display = 'none';
+      var overlay = document.createElement('div');
+      overlay.id = 'pw-overlay';
+      overlay.innerHTML = `
+        <div style="position:fixed;inset:0;background:#111009;display:flex;align-items:center;justify-content:center;z-index:99999;font-family:'Barlow',sans-serif;">
+          <div style="background:#1A1714;border:0.5px solid rgba(242,103,159,0.3);border-radius:16px;padding:2.5rem 2rem;width:100%;max-width:360px;text-align:center;">
+            <div style="font-size:9px;letter-spacing:0.26em;text-transform:uppercase;color:#F2679F;margin-bottom:1.5rem;">Zugang geschützt</div>
+            <div style="font-family:'Barlow Condensed',sans-serif;font-size:1.6rem;color:#EAE5DA;margin-bottom:0.5rem;font-weight:400;">Passwort eingeben</div>
+            <div style="font-size:13px;color:rgba(234,229,218,0.5);margin-bottom:2rem;">Dieser Report ist vertraulich.</div>
+            <input id="pw-input" type="password" placeholder="Passwort" style="width:100%;padding:12px 16px;background:rgba(234,229,218,0.06);border:0.5px solid rgba(234,229,218,0.2);border-radius:8px;color:#EAE5DA;font-size:14px;font-family:'Barlow',sans-serif;outline:none;margin-bottom:12px;" />
+            <div id="pw-error" style="font-size:12px;color:#E08585;margin-bottom:10px;min-height:18px;"></div>
+            <button onclick="checkPw()" style="width:100%;padding:12px;background:#F2679F;border:none;border-radius:8px;color:#fff;font-size:14px;font-family:'Barlow',sans-serif;font-weight:500;cursor:pointer;letter-spacing:0.04em;">Öffnen</button>
+          </div>
+        </div>`;
+      document.body.parentNode.insertBefore(overlay, document.body);
+      document.getElementById('pw-input').addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') checkPw();
+      });
+      setTimeout(function() { document.getElementById('pw-input').focus(); }, 100);
+    });
+  }
+  window.checkPw = function() {
+    var val = document.getElementById('pw-input').value;
+    if (val === correct) {
+      sessionStorage.setItem('report_auth', correct);
+      document.getElementById('pw-overlay').remove();
+      document.body.style.display = '';
+    } else {
+      document.getElementById('pw-error').textContent = 'Falsches Passwort. Bitte nochmal versuchen.';
+      document.getElementById('pw-input').value = '';
+      document.getElementById('pw-input').focus();
+    }
+  };
+})();
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Barlow+Condensed:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
